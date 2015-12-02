@@ -93,6 +93,15 @@ Reserve_State.o ../include/reserve_state_module.mod: Reserve_State.F90 \
    ../include/fdebug.h ../include/fields.mod ../include/global_parameters.mod \
    ../include/spud.mod ../include/state_module.mod
 
+../include/synthetic_eddy_method_module.mod: SyntheticEddyMethod.o
+	@true
+
+SyntheticEddyMethod.o ../include/synthetic_eddy_method_module.mod: \
+   SyntheticEddyMethod.F90 ../include/elements.mod ../include/fdebug.h \
+   ../include/fields.mod ../include/fldebug.mod \
+   ../include/global_parameters.mod ../include/parallel_tools.mod \
+   ../include/spud.mod ../include/state_module.mod
+
 ../include/tidal_module.mod: Tidal_Modelling.o
 	@true
 
@@ -115,5 +124,6 @@ synthetic_bc.o ../include/synthetic_bc.mod: synthetic_bc.F90 \
    ../include/elements.mod ../include/fdebug.h ../include/fields.mod \
    ../include/fldebug.mod ../include/global_parameters.mod \
    ../include/parallel_tools.mod ../include/spud.mod \
-   ../include/state_module.mod
+   ../include/state_module.mod ../include/stochastic.mod \
+   ../include/vtpfortran.mod
 
