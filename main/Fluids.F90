@@ -102,6 +102,7 @@ module fluids_module
   use multiphase_module
   use detector_parallel, only: sync_detector_coordinates, deallocate_detector_list_array
   use tictoc
+  use stochastic
   use momentum_diagnostic_fields, only: calculate_densities
   use sediment_diagnostics, only: calculate_sediment_flux
 
@@ -195,6 +196,8 @@ contains
 
     call initialise_qmesh
     call initialise_write_state
+
+    call initialise_stochastic_module()
 
     ! Initialise Hyperlight
 #ifdef HAVE_HYPERLIGHT
@@ -970,6 +973,8 @@ contains
     ! deallocate the pointer to the array of states and sub-state:
     deallocate(state)
     if(use_sub_state()) deallocate(sub_state)
+
+    call finalise_stochastic_module
 
     ! Clean up registered diagnostics
     call destroy_registered_diagnostics 
