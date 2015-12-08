@@ -953,7 +953,7 @@ contains
          ! Synthetic Eddy Method for generating inflow turbulence
          if (have_sem_bc) then
             surface_field11 => extract_surface_field(field, bc_name, name="MeanProfile")
-            do k=1,3
+            do k=1,mesh_dim(position)
                surface_field_component=extract_scalar_field(surface_field11, k)
                bc_component_path=trim(bc_type_path)//"/"//trim(aligned_components(k))//"/synthetic_eddy_method/mean_profile"
                call initialise_field(surface_field_component, trim(bc_component_path), bc_position, &
@@ -961,7 +961,7 @@ contains
             enddo
             
             surface_field22 => extract_surface_field(field, bc_name, name="TurbulenceLengthscale")
-            do k=1,3
+            do k=1,mesh_dim(position)
                surface_field_component=extract_scalar_field(surface_field22, k)
                bc_component_path=trim(bc_type_path)//"/"//trim(aligned_components(k))//"/synthetic_eddy_method/turbulence_lengthscale"
                call initialise_field(surface_field_component, trim(bc_component_path), bc_position, &
@@ -969,7 +969,7 @@ contains
             enddo
             
             surface_field21 => extract_surface_field(field, bc_name, name="ReStressesProfile")
-            do k=1,3
+            do k=1,mesh_dim(position)
                surface_field_component=extract_scalar_field(surface_field21, k)
                bc_component_path=trim(bc_type_path)//"/"//trim(aligned_components(k))//"/synthetic_eddy_method/Re_stresses_profile"
                call initialise_field(surface_field_component, trim(bc_component_path), bc_position, &
@@ -980,7 +980,7 @@ contains
             call get_option(trim(bc_component_path),nots)
 
             ! allocate memory for eddies...
-            call initialise_sem_memory(ns,surface_field11%dim,nots)
+            call initialise_sem_memory(ns,nots)
             ! calculate the boundary condition...
             call synthetic_eddy_method(surface_field, surface_field11, surface_field21, surface_field22,  &
                  bc_position, bc_component_path, ns)
