@@ -132,7 +132,7 @@ contains
        allocate(seed(seed_size))
        call init_random_seed()
        call random_seed(get=seed)
-       call insert(named_seed,key,c_loc(seed))
+       call insert(named_seed,key,c_loc(seed(1)))
     end if
 
   end subroutine load_seed
@@ -167,7 +167,7 @@ contains
           generic_seed=seed
        else
           print*, seed
-          call insert(named_seed,trim(series_name),c_loc(seed))
+          call insert(named_seed,trim(series_name),c_loc(seed(1)))
           nullify(seed)
        end if
     end do

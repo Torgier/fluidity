@@ -31,7 +31,7 @@ subroutine test_string_hash_table
   allocate(ptr1(4))
   ptr1=[(i,i=1,4)]
 
-  call insert(shash, "Pointer1", c_loc(ptr1))
+  call insert(shash, "Pointer1", c_loc(ptr1(1)))
   ptr2=>fetch(shash,"Pointer1",[4])
 
   do i=1,4
